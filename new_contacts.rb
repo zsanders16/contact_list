@@ -26,14 +26,15 @@ def create_contact
     puts "What is the contact's phone number?"
     phone_number = gets.chomp
 
-    single_contact = [first_name, last_name, phone_number]
+
+    single_contact = {first_name: first_name, last_name: last_name, phone_number: phone_number}
     @contacts << single_contact
     puts "Contact with Name: #{first_name} #{last_name} has been added. \n\n"
 end
 
 def display_contacts
     puts "    Contacts\n--------------"
-    @contacts.each_index { |x| print x + 1, ". #{@contacts[x][0]} #{@contacts[x][1]}, #{@contacts[x][2]} \n"}
+    @contacts.each_with_index { |item, index| print index + 1, ". #{item[:first_name]} #{item[:last_name]}, #{item[:phone_number]} \n"}
     puts "\n --- End of Contacts list --- \n\n"
 end
 
@@ -51,9 +52,13 @@ def edit_contact
     puts "What is the contact's phone number?"
     phone_number = gets.chomp
 
-    single_contact = [first_name, last_name, phone_number]
-    @contacts[selection - 1] = single_contact
-    puts "The contact's name has been updated. \n\n"
+
+
+    @contacts[selection - 1][:first_name] = first_name
+    @contacts[selection - 1][:last_name] = last_name
+    @contacts[selection - 1][:phone_number] = phone_number
+
+    puts "The contact's info has been updated. \n\n"
 end
 
 def delete_contact
